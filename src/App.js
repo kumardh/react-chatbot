@@ -1,38 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import SimpleForm from './SimpleForm';
 import './App.css';
 
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      showChat: false
-    }
-  }
+const App = (props) => {
+  let [showChat, setShowChat] = useState(false);
 
-  startChat = () => {
-    this.setState({
-      showChat : true
-    })
-  }
+  const startChat = () => { setShowChat(true); }
+  const hideChat = () => { setShowChat(false); }
 
-  hideChat = () => {
-    this.setState({
-      showChat : false
-    })
-  }
-
-  render() {
     return (
       <>
       <div className = "header">
         <h2>My Application!!!</h2>
       </div>
-      <div className = "content">
-        <div className ="navSection">
+      <div className = "main">
+        <div className ="nav">
           <h3>My Navigation</h3>
         </div>
-        <div className ="contentSection">
+        <div className ="content">
           <div style = {{padding:"20px"}}>
             <h1>Content of my application will go here.....</h1>
             <p>Sample content to fill the gap as much as possible. Sample content to fill the gap as much as possible.
@@ -44,21 +29,18 @@ class App extends Component {
       </div>
       <div className = "footer">Footer</div>
       <div className = "bot">
-        <div style ={{display: this.state.showChat ? "" : "none"}}>
+        <div style ={{display: showChat ? "" : "none"}}>
           <SimpleForm></SimpleForm>
         </div>      
-        {/* <div>
-          {this.state.showChat ? <SimpleForm></SimpleForm> : null}
-        </div>      */}
+        {/* <div> {showChat ? <SimpleForm></SimpleForm> : null} </div> */}
         <div>
-          {!this.state.showChat 
-            ? <button className="myButton" onClick={() => this.startChat()}>click to chat... </button> 
-            : <button className="myButton" onClick={() => this.hideChat()}>click to hide... </button>}
+          {!showChat 
+            ? <button className="btn" onClick={() => startChat()}>click to chat... </button> 
+            : <button className="btn" onClick={() => hideChat()}>click to hide... </button>}
         </div>
       </div>      
       </>
     )
-  }
 }
 
 export default App;

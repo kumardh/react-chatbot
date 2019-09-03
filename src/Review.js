@@ -1,26 +1,16 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-class Review extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: '',
-      gender: '',
-      age: '',
-    };
-  }
-
-  componentWillMount() {
-    const { steps } = this.props;
+const Review = (props)  => {
+  const [state, setState] = useState({ name: '', gender: '', age: ''});
+  
+  useEffect(() => {
+    const { steps } = props;
     const { name, gender, age } = steps;
+    setState({ name, gender, age });
+  }, [props])
 
-    this.setState({ name, gender, age });
-  }
-
-  render() {
-    const { name, gender, age } = this.state;
+    const { name, gender, age } = state;
     return (
       <div style={{ width: '100%' }}>
         <h3>Summary</h3>
@@ -42,7 +32,6 @@ class Review extends Component {
         </table>
       </div>
     );
-  }
 }
 
 Review.propTypes = {
